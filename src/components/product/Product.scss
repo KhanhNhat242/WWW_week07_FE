@@ -1,0 +1,30 @@
+.prds-wrapper{
+    margin-top: 64px;
+    width: 100%;
+    display: flex;
+
+    .prd-wrapper{
+        width: 25%;
+        cursor: pointer;
+
+        .prd-img{
+            width: 100%;
+            height: auto;
+        }
+
+        .price-wrapper{
+            background-color: #f5f6fb;
+            padding: 10px;
+
+            .prd-name{
+                margin: 0;  
+                text-align: center;
+            }
+
+            .price{
+                margin: 0;
+                text-align: center;
+            }
+        }
+    }
+}
