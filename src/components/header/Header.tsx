@@ -24,9 +24,10 @@ function Header({isLogIn, setIsLogIn}: IProps) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className='nav-right'>
                     <Nav className="me-auto">
+                        <Link className='nav-item' to='/product-manager' style={{display: `${isLogIn ? 'block' : 'none'}`}}>Chỉnh sửa sản phẩm</Link>
                         <Link className='nav-item' to="/product">Sản phẩm</Link>
                         <Link className='nav-item' to="/shopping-cart"><FontAwesomeIcon icon={faCartShopping} /></Link>
-                        <Link className='nav-item' to="/log-in" onClick={() => handleSignOut}>{!isLogIn ? 'Đăng nhập' : 'Đăng xuất'}</Link>
+                        <Link className='nav-item' to="/log-in" onClick={handleSignOut}>{!isLogIn ? 'Đăng nhập' : 'Đăng xuất'}</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

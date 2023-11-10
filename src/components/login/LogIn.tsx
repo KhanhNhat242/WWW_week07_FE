@@ -19,8 +19,8 @@ function LogIn({setIsLogIn}: IProps) {
         account.some((a) => {
             if(a.username === username && a.password === password){
                 setIsLogIn(true)
-                navigate('./product')
-                alert('Log in succesful')
+                navigate('/product')
+                alert('Log in successful')
             }
             else
                 alert('Log in fail')
