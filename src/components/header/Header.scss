@@ -1,17 +1,4 @@
-// .nav-wrapper{
-//     display: flex;
-//     justify-content: space-around; 
-//     position: fixed;
-//     width: 100%;
-//     padding: 20px;
-//     top: 0;
-
-//     .nav-block{
-//         .nav-item{
-//             margin: 5px;
-//         }
-//     }
-// }
+@import '../../globalStyle/mixin';
 
 .nav-wrapper{
     position: fixed;
@@ -20,8 +7,18 @@
     padding: 10px 40px !important;
 
     .nav-right{
-        display: flex;
+        flex: 1;
         justify-content: flex-end;
+
+        @include tablet{
+            flex: none;
+            width: 100%;
+        }
+        
+        @include mobile{
+            flex: none;
+            width: 100%;
+        }
 
         .navbar-nav{
             margin: 0 !important;

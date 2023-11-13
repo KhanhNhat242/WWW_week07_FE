@@ -1,0 +1,51 @@
+@import '../../../globalStyle/mixin';
+
+.add-prd-wrapper{
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+
+    .add-prd-title{
+        text-align: center;
+    }
+
+    .add-prd-form{
+        width: 55%;
+        border: 1px solid orange;
+        border-radius: 10px;
+        padding: 20px;
+
+        @include tablet{
+            width: 90%;
+        }
+
+        @include mobile{
+            width: 100%;
+        }
+
+        .add-prd-col{
+            display: flex;
+            justify-content: flex-end;
+            padding: 0;
+
+            @include tablet{
+                justify-content: flex-start;
+            }
+
+            @include mobile{
+                justify-content: flex-start;
+            }
+
+            .add-prd-label{
+                padding: 5px;
+            }
+        }
+
+        .add-prd-input{
+            padding: 5px;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+        }
+    }
+}
