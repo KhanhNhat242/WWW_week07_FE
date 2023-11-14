@@ -4,7 +4,7 @@
     display: flex;
 
     .prd-wrapper{
-        width: 25%;
+        // width: 25%;
         cursor: pointer;
 
         .prd-img{
@@ -24,6 +24,9 @@
             .price{
                 margin: 0;
                 text-align: center;
+                color: #91ad41;
+                font-weight: bold;
+                font-size: 16px;
             }
         }
     }

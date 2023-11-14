@@ -1,18 +1,43 @@
 import { Row } from 'react-bootstrap';
 import './Product.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { ProductImage, ProductPrice } from '../../interface/Interface';
 
-function Product() {
+interface Props {
+    productImages: ProductImage[],
+    productPrices: ProductPrice[],
+}
+
+function Product({ productImages, productPrices }: Props) {
+
+    const p = []
+
+    for(const pi of productImages){
+        for(const pr of productPrices){
+            if(pi.product.product_id === pr.product.product_id){
+                p.push({...pi, ...pr})
+            }
+        }
+    }
+
+    // console.log(arr)
+
     return ( 
         <div className='prds-wrapper'>
             <Row>
-                <div className='prd-wrapper col-md-3'>
-                    <img className='prd-img' src='https://pos.nvncdn.net/16a837-71503/ps/20220322_CzUUJb8hqJLMkdJSghkAuGaT.jpg' />
-                    <div className='price-wrapper'>
-                            <p className='prd-name'>Xa lach My huu co</p>
-                            <p className='price'>51000</p>
-                    </div>
-                </div>
+                {
+                    p.map((prd) => {
+                        return (
+                            <div className='prd-wrapper col-sm-3'>
+                                <img className='prd-img' src={prd.path} />
+                                <div className='price-wrapper'>
+                                        <p className='prd-name'>{prd.product.name}</p>
+                                        <p className='price'>{prd.price}</p>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
             </Row>
         </div>
      );

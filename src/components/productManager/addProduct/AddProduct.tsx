@@ -1,8 +1,9 @@
 import { Row } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './AddProduct.scss'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface IState {
     product: {
@@ -21,7 +22,17 @@ interface IState {
     }
 }
 
-function AddProduct() {
+interface IProps {
+    isLogIn: boolean
+}
+
+function AddProduct({ isLogIn } : IProps) {
+
+    useEffect(() => {
+        // console.log(isLogIn)
+        if(!isLogIn) navigate('/log-in')
+    }, [])
+
     const [product, setProduct] = useState<IState['product']>({
         name: '',
         description: '',
@@ -43,6 +54,8 @@ function AddProduct() {
         path: '',
     })
 
+    const navigate = useNavigate()
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const {name, value} = e.target
 
@@ -51,12 +64,14 @@ function AddProduct() {
         setProductImage1({...productImage1, [name]: value})
         setProductImage2({...productImage2, [name]: value})
         setProductImage3({...productImage3, [name]: value})
+
+        navigate('/product')
     }
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
 
-        console.log(productPrice)
+        // console.log(productPrice)
 
         await axios.post('http://localhost:8080/addProduct', product)
         await axios.post('http://localhost:8080/addProductPrice', productPrice)

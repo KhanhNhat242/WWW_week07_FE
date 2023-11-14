@@ -1,0 +1,84 @@
+@import '../../globalStyle/mixin';
+
+.shopping-cart-wrapper{
+    margin-top: 64px;
+
+    .shopping-cart-title{
+        margin-left: 40px;
+    }
+
+    .item-row{
+        margin: 40px;
+        padding: 40px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+
+        @include mobile{
+            margin: 0;
+            padding: 0;
+        }
+
+        .item-img{
+            width: 100px;
+            height: 100px;
+
+            @include mobile{
+                width: 100%;
+                height: auto;
+            }
+        }
+    
+        .item-name{
+            font-size: 14px;
+
+            @include mobile{
+                text-align: center;
+            }
+        }
+    
+        .item-price{
+            color: #91ad41;
+            font-weight: bold;
+            font-size: 16px;
+
+            @include mobile{
+                text-align: center;
+            }
+        }
+
+        .quantity-wrapper{
+            display: flex;
+            align-items: center;
+
+            @include mobile{
+                justify-content: center;
+            }
+
+            .change-quantity-btn{
+
+            }
+
+            .quantity{
+                // border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 10px 20px;
+                margin: 0;
+            }
+        }
+
+        .sum-wrapper{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            @include mobile{
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            .sum-price-title{
+                font-size: 18px;
+            }
+        }
+    }
+}
