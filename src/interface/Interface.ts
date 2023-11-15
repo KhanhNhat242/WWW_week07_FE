@@ -20,3 +20,7 @@ export interface ProductPrice {
     price_date_time: string,
     product: Product,
   }
+
+export interface OrderProduct extends ProductImage, ProductPrice{
+  quantity?: number
+}

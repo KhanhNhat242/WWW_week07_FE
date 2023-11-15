@@ -1,32 +1,73 @@
+@import '../../globalStyle/mixin';
+
 .prds-wrapper{
     margin-top: 64px;
+    padding: 0 64px 64px;
     width: 100%;
     display: flex;
+    position: relative;
 
     .prd-wrapper{
         // width: 25%;
-        cursor: pointer;
+        margin-top: 20px;
+
+        @include tablet{
+            height: 37%;
+        }
+
+        @include mobile{
+            margin-top: 50px;
+            height: 10%;
+        }
+
+        &:hover{
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            .prd-img{
+                opacity: 0.6;
+            }
+        }
 
         .prd-img{
             width: 100%;
             height: auto;
+            // position: relative;
+        }
+
+        .order-btn{
+            // display: none;
+            position: absolute;
+            background-color: #91ad41;
+            color: #fff;
+            // left: 8.5%;
+            // top: 33%;
         }
 
         .price-wrapper{
             background-color: #f5f6fb;
             padding: 10px;
 
-            .prd-name{
-                margin: 0;  
-                text-align: center;
+            @include tablet{
+                height: 45%;
             }
 
-            .price{
-                margin: 0;
-                text-align: center;
-                color: #91ad41;
-                font-weight: bold;
-                font-size: 16px;
+            .price-col{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                .prd-name{
+                    margin: 0;  
+                    text-align: left;
+                }
+    
+                .price{
+                    margin: 0;
+                    text-align: center;
+                    color: #91ad41;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
             }
         }
     }

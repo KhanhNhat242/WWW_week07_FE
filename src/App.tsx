@@ -8,7 +8,7 @@ import ProductManager from './components/productManager/ProductManager'
 import AddProduct from './components/productManager/addProduct/AddProduct'
 import EditProduct from './components/productManager/editProduct/EditProduct'
 import axios from 'axios'
-import { ProductImage, ProductPrice } from './interface/Interface'
+import { OrderProduct, ProductImage, ProductPrice } from './interface/Interface'
 import ShoppingCart from './components/shoppingCart/ShoppingCart'
 
 function App() {
@@ -16,8 +16,10 @@ function App() {
   // const [products, setProducts] = useState<Productt[]>([])
   const [productImages, setProductImages] = useState<ProductImage[]>([])
   const [productPrices, setProductPrices] = useState<ProductPrice[]>([])
+  const [count, setCount] = useState<number>(0)
+  const [orderProducts, setOrderProducts] = useState<OrderProduct[]>([])
 
-  const getData = async () => {
+  const getData:() => void = async () => {
     // const res1 = await axios.get('http://localhost:8080/getAllProducts')
     const res2 = await axios.get('http://localhost:8080/getAllProductImage')
     const res3 = await axios.get('http://localhost:8080/getAllProductPrice')
@@ -36,14 +38,14 @@ function App() {
   return (
     <>
       <Router>
-        <Header isLogIn={isLogIn} setIsLogIn={setIsLogIn} />
+        <Header isLogIn={isLogIn} setIsLogIn={setIsLogIn} count={count} />
         <Routes>
-          <Route path='/product' element={<Product productPrices={productPrices} productImages={productImages} />} />
+          <Route path='/product' element={<Product productPrices={productPrices} productImages={productImages} setCount={setCount} count={count} setOrderProducts={setOrderProducts} orderProducts={orderProducts} />} />
           <Route path='/log-in' element={<LogIn setIsLogIn={setIsLogIn}/>} />
           <Route path='/product-manager' element={<ProductManager isLogIn={isLogIn} />} />
           <Route path='/product-manager/add-product' element={<AddProduct isLogIn={isLogIn} />}/>
           <Route path='/product-manager/edit-product' element={<EditProduct />}/>
-          <Route path='/shopping-cart' element={<ShoppingCart />} />
+          <Route path='/shopping-cart' element={<ShoppingCart orderProducts={orderProducts} />} />
         </Routes>
       </Router>
     </>

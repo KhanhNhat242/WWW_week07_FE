@@ -8,7 +8,7 @@
     }
 
     .item-row{
-        margin: 40px;
+        margin: 40px 80px;
         padding: 40px;
         border: 1px solid #ccc;
         border-radius: 10px;
@@ -79,6 +79,34 @@
             .sum-price-title{
                 font-size: 18px;
             }
+
+            .item-price{
+                color: #91ad41;
+            }
         }
     }
+
+    .order-price-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin: 40px 80px;
+        padding: 40px;
+
+        .order-price-title{
+            .order-price{
+                color: #91ad41;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+
+        .submit-wrapper{
+            .submit-order-btn{
+                background-color: #91ad41;
+                color: #fff;
+                margin-left: 10px;
+            }
+        }
+    }    
 }
