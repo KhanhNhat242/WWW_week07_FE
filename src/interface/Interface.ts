@@ -5,6 +5,7 @@ export interface Product {
     product_id: number,
     status: string,
     unit: string,
+    // quantity: number,
   }
   
 export interface ProductImage {
@@ -22,5 +23,6 @@ export interface ProductPrice {
   }
 
 export interface OrderProduct extends ProductImage, ProductPrice{
-  quantity?: number
+  quantity: number,
+  orderPrice: number,
 }

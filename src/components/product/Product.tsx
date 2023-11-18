@@ -17,17 +17,19 @@ interface Props {
 function Product({ productImages, productPrices, setCount, count, setOrderProducts, orderProducts }: Props) {
 
     const p = []
+    const q = {quantity: 1}
     const navigate = useNavigate()
 
     for(const pi of productImages){
         for(const pr of productPrices){
             if(pi.product.product_id === pr.product.product_id){
-                p.push({...pi, ...pr})
+                const op = {orderPrice: pr.price}
+                p.push({...pi, ...pr, ...q, ...op})
             }
         }
     }
 
-    const handleOrder = (prd: OrderProduct) => {
+    const handleOrder:(arg0: OrderProduct) => void = (prd: OrderProduct) => {
         setOrderProducts([...orderProducts, prd])
         setCount(count + 1)
         navigate('/shopping-cart')

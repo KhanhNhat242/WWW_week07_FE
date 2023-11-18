@@ -45,7 +45,7 @@ function App() {
           <Route path='/product-manager' element={<ProductManager isLogIn={isLogIn} />} />
           <Route path='/product-manager/add-product' element={<AddProduct isLogIn={isLogIn} />}/>
           <Route path='/product-manager/edit-product' element={<EditProduct />}/>
-          <Route path='/shopping-cart' element={<ShoppingCart orderProducts={orderProducts} />} />
+          <Route path='/shopping-cart' element={<ShoppingCart orderProducts={orderProducts} count={count} setCount={setCount} />} />
         </Routes>
       </Router>
     </>
