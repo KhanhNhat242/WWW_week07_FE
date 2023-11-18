@@ -30,9 +30,44 @@ function Product({ productImages, productPrices, setCount, count, setOrderProduc
     }
 
     const handleOrder:(arg0: OrderProduct) => void = (prd: OrderProduct) => {
-        setOrderProducts([...orderProducts, prd])
-        setCount(count + 1)
-        navigate('/shopping-cart')
+        let flag: number = 0
+        let currentId: number = 0
+
+        if(orderProducts.length == 0){
+            setOrderProducts([...orderProducts, prd])
+            setCount(count + 1)
+            navigate('/shopping-cart')
+        }
+        else if(orderProducts.length != 0){
+            for(const op of orderProducts){
+                if(prd.product.product_id === op.product.product_id){
+                    currentId = op.product.product_id
+                    flag = 1
+                }
+                else{
+                    flag = 2
+                }
+            }
+        }
+
+        if(flag == 1){
+            setOrderProducts((prev) => {
+                prev.map((p) => {
+                    if(p.product.product_id === currentId){
+                        p.orderPrice = p.orderPrice + p.price
+                        p.quantity = p.quantity + 1
+                    }
+                    return {...p}
+                })
+            return prev
+            })
+            navigate('/shopping-cart')
+        }
+        else if(flag == 2){
+            setOrderProducts([...orderProducts, prd])
+            setCount(count + 1)
+            navigate('/shopping-cart')
+        }
     }
 
     return ( 

@@ -8,14 +8,9 @@ import { OrderProduct } from "../../interface/Interface";
 
 interface Props {
     orderProducts: OrderProduct[],
-    count: number,
-    setCount: React.Dispatch<React.SetStateAction<number>>,
 }
 
-function ShoppingCart({ orderProducts, count, setCount }: Props) {
-
-    // const [quantities, setQuantities] = useState<number[]>([])
-    // const [prices, setPrices] = useState<number[]>([])
+function ShoppingCart({ orderProducts }: Props) {
     const [prd, setPrd] = useState<OrderProduct[]>(orderProducts)
     const [flag, setFlag] = useState<number>(0)
     const [totalPrice, setTotalPrice] = useState<number>(0)
@@ -50,32 +45,25 @@ function ShoppingCart({ orderProducts, count, setCount }: Props) {
                 }
                 return p
             })
-            // console.log(prev)
             return prev
         })
-        // console.log(prd)
+    }
+
+    const handleDelete:(arg0: number, arg1: number) => void = (id: number, orderPrice: number) => {
+        let prd: OrderProduct[]= []
+        setPrd(prev => {
+            prev.map((p) => {
+                if(p.product.product_id != id){
+                    console.log(p.product.product_id)
+                    return prd = [...prd, p]
+                }
+            })
+            return prev
+        })
+        setTotalPrice(totalPrice - orderPrice)
     }
 
     useEffect(() => {
-        for(let i = 0; i < prd.length-1; i++){
-            if(prd[prd.length - 1].product.product_id === prd[i].product.product_id){
-                setCount(count - 1)
-                setPrd(prd.slice(0, prd.length - 1))
-                setTotalPrice(totalPrice + prd[prd.length - 1].price/2)
-                setPrd((prev) => {
-                    prev.map((p) => {
-                        if(p.product.product_id == prd[prd.length - 1].product.product_id ){
-                            p.quantity = p.quantity + 1/4
-                            p.orderPrice = p.orderPrice + p.price/4
-                            return {...p}
-                        }
-                        return p
-                    })
-                    return prev
-                })
-            }
-        }
-
         for(const p of prd){
             setTotalPrice(prev => {
                 return prev + p.orderPrice/2
@@ -84,9 +72,7 @@ function ShoppingCart({ orderProducts, count, setCount }: Props) {
     }, [])
 
     const render:() => JSX.Element[] = () => {
-        
         return prd.map((o) => {
-            // console.log(o.quantity)
             return (
                 <Row className='item-row' key={o.product.product_id}>
                     <div className='col-sm-3'>
@@ -109,7 +95,7 @@ function ShoppingCart({ orderProducts, count, setCount }: Props) {
                     <div className='sum-wrapper col-sm-3'>
                         <p className='sum-price-title'>Tổng tiền</p>
                         <p className='item-price'>{o.orderPrice}</p>
-                        <button className='delete-btn'><FontAwesomeIcon icon={faTrash} /> Xóa</button>
+                        <button className='delete-btn' onClick={() => handleDelete(o.product.product_id, o.orderPrice)}><FontAwesomeIcon icon={faTrash} /> Xóa</button>
                     </div>
                 </Row>
             )
