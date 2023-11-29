@@ -43,6 +43,7 @@ function Product({ productImages, productPrices, setCount, count, setOrderProduc
                 if(prd.product.product_id === op.product.product_id){
                     currentId = op.product.product_id
                     flag = 1
+                    break
                 }
                 else{
                     flag = 2
@@ -93,14 +94,6 @@ function Product({ productImages, productPrices, setCount, count, setOrderProduc
                         )
                     })
                 }
-                {/* <div className='prd-wrapper col-sm-3'>
-                    <img className='prd-img' src='https://pos.nvncdn.net/16a837-71503/ps/20220322_EVgUTsE1ipZN6UaPzBlm9opz.jpg' />
-                    <button className='order-btn'>Đặt hàng</button>
-                    <div className='price-wrapper'>
-                            <p className='prd-name'>asdfj</p>
-                            <p className='price'>dsfsdg</p>
-                    </div>
-                </div> */}
             </Row>
         </div>
      );

@@ -3,14 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row } from "react-bootstrap";
 import './ShoppingCart.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { OrderProduct } from "../../interface/Interface";
 
 interface Props {
     orderProducts: OrderProduct[],
+    count: number,
+    setCount: React.Dispatch<React.SetStateAction<number>>,
+    setOrderProducts: React.Dispatch<React.SetStateAction<OrderProduct[]>>,
 }
 
-function ShoppingCart({ orderProducts }: Props) {
+function ShoppingCart({ orderProducts, count, setCount, setOrderProducts }: Props) {
     const [prd, setPrd] = useState<OrderProduct[]>(orderProducts)
     const [flag, setFlag] = useState<number>(0)
     const [totalPrice, setTotalPrice] = useState<number>(0)
@@ -49,18 +52,15 @@ function ShoppingCart({ orderProducts }: Props) {
         })
     }
 
-    const handleDelete:(arg0: number, arg1: number) => void = (id: number, orderPrice: number) => {
-        let prd: OrderProduct[]= []
-        setPrd(prev => {
-            prev.map((p) => {
-                if(p.product.product_id != id){
-                    console.log(p.product.product_id)
-                    return prd = [...prd, p]
-                }
-            })
-            return prev
-        })
+    const handleDelete:(arg0: number, arg1: number) => void = (orderPrice: number, index: number) => {
+        const newPrd = [...prd]
+
+        newPrd.splice(index, 1)
+
+        setOrderProducts(newPrd)
+        setPrd(newPrd)
         setTotalPrice(totalPrice - orderPrice)
+        setCount(count - 1)
     }
 
     useEffect(() => {
@@ -72,7 +72,7 @@ function ShoppingCart({ orderProducts }: Props) {
     }, [])
 
     const render:() => JSX.Element[] = () => {
-        return prd.map((o) => {
+        return prd.map((o, index) => {
             return (
                 <Row className='item-row' key={o.product.product_id}>
                     <div className='col-sm-3'>
@@ -95,7 +95,7 @@ function ShoppingCart({ orderProducts }: Props) {
                     <div className='sum-wrapper col-sm-3'>
                         <p className='sum-price-title'>Tổng tiền</p>
                         <p className='item-price'>{o.orderPrice}</p>
-                        <button className='delete-btn' onClick={() => handleDelete(o.product.product_id, o.orderPrice)}><FontAwesomeIcon icon={faTrash} /> Xóa</button>
+                        <button className='delete-btn' onClick={() => handleDelete(o.orderPrice, index)}><FontAwesomeIcon icon={faTrash} /> Xóa</button>
                     </div>
                 </Row>
             )
@@ -108,17 +108,22 @@ function ShoppingCart({ orderProducts }: Props) {
 
     return ( 
         <div className='shopping-cart-wrapper'>
-            <h2 className='shopping-cart-title'>Giỏ hàng</h2>
+            <h2 className='shopping-cart-title'>{`Giỏ hàng (${count} sản phẩm)`}</h2>
             {   
                 flag == 0 ? render() : reRender()
             }
-            <div className='order-price-wrapper'>
-                <p className='order-price-title'>Thành tiền <span className='order-price'>{totalPrice}</span></p>
-                <div className="submit-wrapper">
-                    <button className="continue-shopping-btn">Tiếp tục mua sắm</button>
-                    <button className="submit-order-btn">Đặt hàng ngay</button>
-                </div>
-            </div>
+            {
+                count == 0 ? <></> : (
+                    <div className='order-price-wrapper'>
+                        <p className='order-price-title'>Thành tiền <span className='order-price'>{totalPrice}</span></p>
+                        <div className="submit-wrapper">
+                            <button className="continue-shopping-btn">Tiếp tục mua sắm</button>
+                            <button className="submit-order-btn">Đặt hàng ngay</button>
+                        </div>
+                    </div>
+                )
+            }
+            
         </div>    
     );
 }
