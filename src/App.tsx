@@ -10,6 +10,7 @@ import EditProduct from './components/productManager/editProduct/EditProduct'
 import axios from 'axios'
 import { OrderProduct, ProductImage, ProductPrice } from './interface/Interface'
 import ShoppingCart from './components/shoppingCart/ShoppingCart'
+import Payment from './components/payment/Payment'
 
 function App() {
   const [isLogIn, setIsLogIn] = useState<boolean>(false)
@@ -46,6 +47,7 @@ function App() {
           <Route path='/product-manager/add-product' element={<AddProduct isLogIn={isLogIn} />}/>
           <Route path='/product-manager/edit-product' element={<EditProduct />}/>
           <Route path='/shopping-cart' element={<ShoppingCart orderProducts={orderProducts} count={count} setCount={setCount} setOrderProducts={setOrderProducts} />} />
+          <Route path='/payment' element={<Payment orderProducts={orderProducts} count={count} />} />
         </Routes>
       </Router>
     </>

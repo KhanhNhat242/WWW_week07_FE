@@ -5,6 +5,7 @@ import './ShoppingCart.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from "react";
 import { OrderProduct } from "../../interface/Interface";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     orderProducts: OrderProduct[],
@@ -17,6 +18,8 @@ function ShoppingCart({ orderProducts, count, setCount, setOrderProducts }: Prop
     const [prd, setPrd] = useState<OrderProduct[]>(orderProducts)
     const [flag, setFlag] = useState<number>(0)
     const [totalPrice, setTotalPrice] = useState<number>(0)
+
+    const navigate = useNavigate()
 
     const handleInc:(arg0: number) => void = (id: number) => {
         setPrd((prev) => {
@@ -61,6 +64,11 @@ function ShoppingCart({ orderProducts, count, setCount, setOrderProducts }: Prop
         setPrd(newPrd)
         setTotalPrice(totalPrice - orderPrice)
         setCount(count - 1)
+    }
+
+    const handlePayment:() => void = () => {
+        setOrderProducts(prd)
+        navigate('/payment')
     }
 
     useEffect(() => {
@@ -118,12 +126,11 @@ function ShoppingCart({ orderProducts, count, setCount, setOrderProducts }: Prop
                         <p className='order-price-title'>Thành tiền <span className='order-price'>{totalPrice}</span></p>
                         <div className="submit-wrapper">
                             <button className="continue-shopping-btn">Tiếp tục mua sắm</button>
-                            <button className="submit-order-btn">Đặt hàng ngay</button>
+                            <button className="submit-order-btn" onClick={() => handlePayment()}>Đặt hàng ngay</button>
                         </div>
                     </div>
                 )
-            }
-            
+            }     
         </div>    
     );
 }
